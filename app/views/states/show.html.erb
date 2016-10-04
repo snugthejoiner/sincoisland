@@ -1,0 +1,16 @@
+<h1><%= @state.name %></h1>
+ 
+<div class="row">
+  <div class="col-md-12">
+    <p>Population: <%= number_with_delimiter(@state.population) %></p>
+    <p>Coordinates: <%= @state.x %> | <%= @state.y %></p>
+    <p><%= @state.note %></p>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+     <%= link_to "Edit State", edit_state_path(@state), class: 'btn-sm btn-success' %>
+     <%= link_to "Delete State", @state, method: :delete, class: 'btn-sm btn-danger', data: {confirm: 'Are you sure you want to delete this State?'} %>
+   </div>  
+</div>

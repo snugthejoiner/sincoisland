@@ -1,0 +1,14 @@
+<h1>Sinco Island States</h1>
+
+<div class="row">
+    <div class="col-md-8">
+      <% @states.each do |state| %>
+        <h2 class="media-heading">
+          <%= link_to state.name, state %>
+        </h2>
+      <% end %>
+    </div>
+    <div class="col-md-4">
+     <%= link_to "Create New State", new_state_path, class: 'btn btn-primary' %>
+   </div>
+  </div>

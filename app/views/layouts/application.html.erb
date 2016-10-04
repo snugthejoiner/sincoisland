@@ -1,16 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Sincoisland</title>
+  <title>Sinco Island</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <%= favicon_link_tag 'favicon.ico' %>
+  <link href="assets/bootstrap.min.css" rel="stylesheet">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
 </head>
-<body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <body>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "States", states_path %></li>
+      </ul>
 
-<%= yield %>
+      <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:notice] %>
+        </div>
+      <% elsif flash.now[:alert] %>
+        <div class="alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash.now[:alert] %>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="alert alert-warning">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
 
+      <%= yield %>
+
+    </div>
 </body>
 </html>
