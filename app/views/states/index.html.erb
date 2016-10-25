@@ -1,14 +1,24 @@
 <h1>Sinco Island States</h1>
 
 <div class="row">
-    <div class="col-md-8">
-      <% @states.each do |state| %>
-        <h2 class="media-heading">
-          <%= link_to state.name, state %>
-        </h2>
+  <div class="col-md-12">
+    <% @states.sorted_by_smart_alpha.each do |state| %>
+      <h4 class="media-heading">
+        <%= link_to state.name, state %>
+      </h4>
+        <% state.counties.each do |county| %>
+          <h5 class="media-heading">
+            <%= link_to county.name, state_county_path(state, county) %>
+          </h5>
+        <% end %>
+        <br>
       <% end %>
+      </div>
     </div>
-    <div class="col-md-4">
-     <%= link_to "Create New State", new_state_path, class: 'btn btn-primary' %>
-   </div>
+<hr>
+<div class="row">
+  <div class="col-md-12">
+      <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> 
+    <%= link_to "Create New State", new_state_path %>
   </div>
+</div>

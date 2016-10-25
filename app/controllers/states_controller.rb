@@ -14,8 +14,8 @@ class StatesController < ApplicationController
   def create
 
     @state = State.new
-    @state.population = params[:state][:name]
-    @state.name = params[:state][:population]
+    @state.name = params[:state][:name]
+    @state.population = params[:state][:population]
     @state.x = params[:state][:x]
     @state.y = params[:state][:y]
     @state.note = params[:state][:note]

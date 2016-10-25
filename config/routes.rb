@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :states
+
+  resources :states do
+    resources :counties, except: [:index]
+  end
+
 
   devise_for :users
   root 'welcome#index'

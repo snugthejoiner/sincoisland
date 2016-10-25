@@ -1,21 +1,19 @@
-<h1>Edit State</h1>
+<h1>Edit County</h1>
  
 <div class="row">
   <div class="col-md-12">
-    <%= form_for @state do |f| %>
+    <%= form_for [@state, @county] do |f| %>
+      <div>
+        <%= f.label :state %>
+        <%= f.collection_select :state_id, State.order(:name),:id,:name, include_blank: false %>
+      </div>
       <div class="form-group">
         <%= f.label :name %>
-          <%= f.text_field :name, class: 'form-control', placeholder: "Enter the name of the State" %>
+        <%= f.text_field :name, class: 'form-control', placeholder: "Enter the name of the County" %>
       </div>
       <div class="form-group">
         <%= f.label :population %>
         <%= f.number_field :population, class: 'form-control', placeholder: "Choose a number between 500 and 30,000", in: 500..30000, step: 'any' %>
-      </div>
-      <div class="form-group">
-        <%= f.label 'X Coordinate'%>
-        <%= f.select(:x, options_for_select(1..10,@state.x))%>
-        <%= f.label 'Y Coordinate'%>
-        <%= f.select(:y, options_for_select(1..10,@state.y))%>
       </div>
       <div class="form-group">
         <%= f.label :note %>
