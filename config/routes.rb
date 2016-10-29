@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   resources :states do
-    resources :counties, except: [:index]
+    resources :counties, except: [:index] do
+      resources :localities, except: [:index]
+    end
   end
 
 

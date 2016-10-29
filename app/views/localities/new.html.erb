@@ -1,16 +1,20 @@
- <h1>New County</h1>
- 
+ <h1>New City or Town</h1>
+
   <div class="row">
     <div class="col-md-12">
-      <%= form_for [@state, @county] do |f| %>
+      <%= form_for [@state, @county, @locality] do |f| %>
       <div>
         <%= f.label :state %>
         <%= f.collection_select :state_id, State.all,:id,:name, {selected: @state.id} %>
       </div>
-        <div class="form-group">
-          <%= f.label :name %>
-          <%= f.text_field :name, class: 'form-control', placeholder: "Enter the name of the county" %>
-        </div>
+      <div>
+        <%= f.label :county %>
+        <%= f.collection_select :county_id, County.all,:id,:name, {selected: @county.id} %>
+      </div>
+      <div class="form-group">
+        <%= f.label :locality_type %>
+        <%= f.select(:locality_type, options_for_select([["City","City"],["Town","Town"]],"City")) %>
+      </div>
         <div class="form-group">
           <%= f.label :name %>
           <%= f.text_field :name, class: 'form-control', placeholder: "Enter the name of the city or town" %>

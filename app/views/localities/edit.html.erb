@@ -1,0 +1,35 @@
+<h1>Edit Town or City</h1>
+ 
+<div class="row">
+  <div class="col-md-12">
+    <%= form_for [@state, @county, @locality] do |f| %>
+      <div>
+        <%= f.label :state %>
+        <%= f.collection_select :state_id, State.order(:name),:id,:name, {selected: @state.id}  %>
+      </div>
+      <div>
+        <%= f.label :county %>
+        <%= f.collection_select :county_id, County.all,:id,:name, {selected: @county.id} %>
+      </div>
+      <div class="form-group">
+        <%= f.label :locality_type %>
+        <%= f.select(:locality_type, options_for_select([["City","City"],["Town","Town"]],@locality.locality_type)) %>
+      </div>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control', placeholder: "Enter the name of the City or Town" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :population %>
+        <%= f.number_field :population, class: 'form-control', placeholder: "Choose a number between 500 and 30,000", in: 500..30000, step: 'any' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :note %>
+        <%= f.text_area :note, rows: 5, placeholder: "Leave a note or a comment", class: 'form-control'%>
+      </div>
+ 
+      <%= f.submit "Save", class: 'btn btn-success'  %>
+  </div>
+ </div>
+
+ <% end %>

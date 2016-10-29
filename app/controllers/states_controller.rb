@@ -1,4 +1,5 @@
 class StatesController < ApplicationController
+  
   def index
     @states = State.all
   end
@@ -13,12 +14,7 @@ class StatesController < ApplicationController
 
   def create
 
-    @state = State.new
-    @state.name = params[:state][:name]
-    @state.population = params[:state][:population]
-    @state.x = params[:state][:x]
-    @state.y = params[:state][:y]
-    @state.note = params[:state][:note]
+    @state = State.new(state_params)
 
     if @state.save
       flash[:notice] = 'State was saved successfully.'
@@ -35,17 +31,13 @@ class StatesController < ApplicationController
 
    def update
     @state = State.find(params[:id])
-    @state.name = params[:state][:name]
-    @state.population = params[:state][:population]
-    @state.x = params[:state][:x]
-    @state.y = params[:state][:y]
-    @state.note = params[:state][:note]
+    @state.assign_attributes(state_params)
  
      if @state.save
        flash[:notice] = "State was updated successfully."
        redirect_to @state
      else
-       flash.now[:alert] = "There was an error saving this State. Please try again."
+       flash.now[:alert] = "There was an error saving this state. Please try again."
        render :edit
      end
    end
@@ -60,6 +52,12 @@ class StatesController < ApplicationController
        flash.now[:alert] = "There was an error deleting the State."
        render :show
      end
+   end
+
+   private
+
+   def state_params
+    params.require(:state).permit(:name, :population, :x, :y, :note)
    end
 
 end

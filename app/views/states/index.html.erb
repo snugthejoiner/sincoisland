@@ -2,14 +2,23 @@
 
 <div class="row">
   <div class="col-md-12">
-    <% @states.sorted_by_smart_alpha.each do |state| %>
+    <% @states.sorted_by_smart_alpha.each_with_index do |state, index| %>
       <h4 class="media-heading">
-        <%= link_to state.name, state %>
+        <%= index + 1 %> <%= link_to state.name, state %>
       </h4>
-        <% state.counties.each do |county| %>
-          <h5 class="media-heading">
-            <%= link_to county.name, state_county_path(state, county) %>
-          </h5>
+        <% if state.countied? %>
+          <% state.counties.each.each_with_index do |county, sindex| %>
+            <h5 class="media-heading">
+              <%= index + 1 %>.<%= sindex + 1 %> <%= link_to county.name, state_county_path(state, county) %>
+            </h5>
+            <% if county.localitied? %>
+          <% county.localities.each.each_with_index do |locality, tindex| %>
+            <h6 class="media-heading">
+              <%= index + 1 %>.<%= sindex + 1 %>.<%= tindex + 1 %> <%= link_to locality.name, state_county_locality_path(state, county, locality) %>
+            </h6>
+          <% end %>
+        <% end %>
+          <% end %>
         <% end %>
         <br>
       <% end %>

@@ -9,4 +9,8 @@ class State < ActiveRecord::Base
     State.all.sort_by(&:smart_alpha)
   end
 
+  def countied?
+    self.counties.present? == true
+  end
+
 end
